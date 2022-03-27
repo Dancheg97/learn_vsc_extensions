@@ -10,14 +10,21 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:grpcninja.helloWorld"
+        "onCommand:grpcninja.helloWorld",
+        "onCommand:grpcninja.helloRoad"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "grpcninja.helloWorld",
+				"category": "gRPC ninja",
 				"title": "Hello World"
+			},
+			{
+				"command": "grpcninja.helloRoad",
+				"category": "gRPC ninja",
+				"title": "Hello Road"
 			}
 		]
 	},
