@@ -28,7 +28,7 @@ export class GrpcNinjaPanel {
     // Otherwise, create a new panel.
     const panel = vscode.window.createWebviewPanel(
       GrpcNinjaPanel.viewType,
-      "VSinder",
+      "gRPC api testing",
       column || vscode.ViewColumn.One,
       {
         // Enable javascript in the webview
@@ -120,7 +120,7 @@ export class GrpcNinjaPanel {
   private _getHtmlForWebview(webview: vscode.Webview) {
     // // And the uri we use to load this script in the webview
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.js")
+      vscode.Uri.joinPath(this._extensionUri, "media", "main.js")
     );
 
     // Local path to css styles
@@ -163,6 +163,9 @@ export class GrpcNinjaPanel {
         </script>
 			</head>
       <body>
+      <h1> Hello world! </h1>
+      <button> Heyo! </button>
+      <input>
 			</body>
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</html>`;

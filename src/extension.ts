@@ -1,11 +1,12 @@
 import * as vscode from "vscode";
+import { GrpcNinjaPanel } from "./swiper";
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('Congratulations, your extension "grpcninja" is now active!');
 
   context.subscriptions.push(
     vscode.commands.registerCommand("grpcninja.helloWorld", () => {
-      vscode.window.showInformationMessage("Changing first command!");
+      GrpcNinjaPanel.createOrShow(context.extensionUri);
     })
   );
 
