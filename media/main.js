@@ -4,5 +4,5 @@
 (function () {
     const vscode = acquireVsCodeApi();
 
-    console.log("HELLO HEYEHEY")
+    console.log("HELLO HEYEHEY");
 }());

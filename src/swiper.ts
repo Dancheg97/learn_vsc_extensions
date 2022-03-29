@@ -159,13 +159,12 @@ export class GrpcNinjaPanel {
 				<link href="${stylesMainUri}" rel="stylesheet">
         <link href="${cssUri}" rel="stylesheet">
         <script nonce="${nonce}">
-        
         </script>
 			</head>
       <body>
       <h1> Hello world! </h1>
-      <button> Heyo! </button>
       <input>
+      <button> Heyo! </button>
 			</body>
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</html>`;
