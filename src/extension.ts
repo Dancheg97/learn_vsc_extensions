@@ -5,7 +5,7 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
     "grpc-rocket.helloWorld",
     () => {
-      vscode.window.showInformationMessage("Hello World from grpc_rocket!");
+      vscode.window.showInformationMessage("Hola bruh!");
     }
   );
 
