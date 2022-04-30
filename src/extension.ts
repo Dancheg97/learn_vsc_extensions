@@ -1,11 +1,12 @@
 import * as vscode from "vscode";
+import { HelloPanel } from "./HelloPanel";
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('Congratulations, your extension "grpc-rocket" is now active!');
 
   context.subscriptions.push(
     vscode.commands.registerCommand("grpc-rocket.helloWorld", () => {
-      vscode.window.showInformationMessage("Hola bruh!");
+      HelloPanel.createOrShow(context.extensionUri);
     })
   );
 

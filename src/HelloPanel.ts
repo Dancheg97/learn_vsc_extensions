@@ -27,7 +27,7 @@ export class HelloPanel {
     // Otherwise, create a new panel.
     const panel = vscode.window.createWebviewPanel(
       HelloPanel.viewType,
-      "VSinder",
+      "gRPC-Rocket",
       column || vscode.ViewColumn.One,
       {
         // Enable javascript in the webview
@@ -127,28 +127,27 @@ export class HelloPanel {
       vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.js")
     );
 
-    // Local path to css styles
-    const styleResetPath = vscode.Uri.joinPath(
-      this._extensionUri,
-      "media",
-      "reset.css"
-    );
-    const stylesPathMainPath = vscode.Uri.joinPath(
-      this._extensionUri,
-      "media",
-      "vscode.css"
-    );
-
     // Uri to load styles into webview
-    const stylesResetUri = webview.asWebviewUri(styleResetPath);
-    const stylesMainUri = webview.asWebviewUri(stylesPathMainPath);
+    const stylesResetUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "media", "reset.css")
+    );
+    const stylesMainUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "media", "vscode.css")
+    );
     const cssUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.css")
     );
 
     // Use a nonce to only allow specific scripts to be run
-    const nonce = getNonce();
-
+    function nonce() {
+      let text = "";
+      const possible =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      for (let i = 0; i < 32; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+      return text;
+    }
     return `<!DOCTYPE html>
 			<html lang="en">
 			<head>
@@ -157,22 +156,19 @@ export class HelloPanel {
 					Use a content security policy to only allow loading images from https or from our extension directory,
 					and only allow scripts that have a specific nonce.
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src ${apiBaseUrl}; img-src https: data:; style-src 'unsafe-inline' ${
-      webview.cspSource
-    }; script-src 'nonce-${nonce}';">
+        <meta http-equiv="Content-Security-Policy" content="img-src https: data:; style-src 'unsafe-inline' ${webview.cspSource}; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<link href="${stylesResetUri}" rel="stylesheet">
+				<link href="" rel="stylesheet">
+        <link href="${stylesResetUri}" rel="stylesheet">
 				<link href="${stylesMainUri}" rel="stylesheet">
-        <link href="${cssUri}" rel="stylesheet">
         <script nonce="${nonce}">
-            const apiBaseUrl = ${JSON.stringify(apiBaseUrl)};
-            const tsvscode = acquireVsCodeApi();
-            let accessToken = ${JSON.stringify(Util.getAccessToken())};
-            let refreshToken = ${JSON.stringify(Util.getRefreshToken())};
-            ${FlairProvider.getJavascriptMapString()}
+            
         </script>
 			</head>
       <body>
+        <h1>Hello world!</h1>
+        <input />
+        <button> button </button>
 			</body>
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</html>`;
